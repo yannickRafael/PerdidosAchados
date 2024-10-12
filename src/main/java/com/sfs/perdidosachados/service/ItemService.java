@@ -29,4 +29,8 @@ public class ItemService {
     public Item updateById(int id, Item item) {
         return itemRepository.updateById(id, item);
     }
+
+    public void deleteById(int id) {
+        itemRepository.deleteById(id);
+    }
 }
