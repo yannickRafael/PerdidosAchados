@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ResolvRepository extends JpaRepository<Resolv, Integer> {
 
+    Resolv updateById(int id, Resolv resolv);
+
 }
