@@ -14,14 +14,14 @@ public class ClaimService {
     @Autowired
     private ClaimRepository claimRepository;
 
-    public List<Claim> getAllClaims() {
+    public List<Claim> findAll() {
         return claimRepository.findAll();
     }
-    public Optional<Claim> getClaimById(int id) {
+    public Optional<Claim> findById(int id) {
         return claimRepository.findById(id);
     }
 
-    public Claim createClaim(Claim claim) {
+    public Claim save(Claim claim) {
         return claimRepository.save(claim);
     }
 
