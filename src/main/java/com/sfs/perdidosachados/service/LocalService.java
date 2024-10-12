@@ -18,4 +18,20 @@ public class LocalService {
         return localRepository.findAll();
     }
 
+    public Optional<Local> findById(int id) {
+        return localRepository.findById(id);
+    }
+
+    public Local save(Local local) {
+        return localRepository.save(local);
+    }
+
+    public Local updateById(int id, Local local) {
+        return localRepository.updateById(id, local);
+    }
+
+    public void deleteById(int id) {
+        localRepository.deleteById(id);
+    }
+
 }
