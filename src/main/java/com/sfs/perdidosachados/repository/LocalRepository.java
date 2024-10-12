@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LocalRepository extends JpaRepository<Local, Integer> {
 
+    Local updateById(Integer id, Local local);
+
 }
