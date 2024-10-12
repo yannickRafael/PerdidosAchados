@@ -34,7 +34,7 @@ public class CategoryController {
             if (category.isPresent()) {
                 return ResponseEntity.ok(category.get());
             }else {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found");
             }
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch category: " + e.getMessage());
