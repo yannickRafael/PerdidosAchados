@@ -22,5 +22,7 @@ public class ItemService {
         return itemRepository.findById(id);
     }
 
-
+    public Item save(Item item) {
+        return itemRepository.save(item);
+    }
 }
