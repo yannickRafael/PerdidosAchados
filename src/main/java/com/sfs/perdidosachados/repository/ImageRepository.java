@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ImageRepository extends JpaRepository<Image, Integer> {
+
+    Image updateById(int id, Image image);
+
 }
