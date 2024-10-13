@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/image")
@@ -30,36 +31,43 @@ public class ImageController {
     @GetMapping("/getById/{id}")
     public ResponseEntity<?> getById(@PathVariable Integer id){
         try {
-            return ResponseEntity.ok("");
+            Optional<Image> image = imageService.findById(id);
+            if (image.isPresent()) {
+                return ResponseEntity.status(HttpStatus.FOUND).body(image.get());
+            }else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Image not found");
+            }
         }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch **: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch image: " + e.getMessage());
         }
     }
 
     @GetMapping("/save")
-    public ResponseEntity<?> save(@ResponseBody){
+    public ResponseEntity<?> save(@RequestBody Image image){
         try {
-            return ResponseEntity.ok("");
+            Image savedImage = imageService.save(image);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedImage);
         }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch **: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create image: " + e.getMessage());
         }
     }
 
     @GetMapping("/update/{id}")
-    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ){
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Image image){
         try {
-            return ResponseEntity.ok("");
+            Image updatedImage = imageService.updateById(id, image);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedImage);
         }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch **: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update image: " + e.getMessage());
         }
     }
 
     @GetMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
         try {
-            return ResponseEntity.ok("");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Image deleted:");
         }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch categorias: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete image: " + e.getMessage());
         }
     }
 }
