@@ -21,7 +21,7 @@ public class CategoryController {
     public ResponseEntity<?> getAll(){
         try {
             List<Category> categories = categoryService.findAll();
-            return ResponseEntity.status(HttpStatus.OK).body(categories);
+            return ResponseEntity.status(HttpStatus.FOUND).body(categories);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch categories: " + e.getMessage());
         }
@@ -32,7 +32,7 @@ public class CategoryController {
         try {
             Optional<Category> category = categoryService.findById(id);
             if (category.isPresent()) {
-                return ResponseEntity.status(HttpStatus.OK).body(category.get());
+                return ResponseEntity.status(HttpStatus.FOUND).body(category.get());
             }else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found");
             }
