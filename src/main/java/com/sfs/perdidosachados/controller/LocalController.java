@@ -1,6 +1,5 @@
 package com.sfs.perdidosachados.controller;
 
-import com.sfs.perdidosachados.model.Item;
 import com.sfs.perdidosachados.model.Local;
 import com.sfs.perdidosachados.service.LocalService;
 import org.springframework.beans.factory.annotation.Autowired;
