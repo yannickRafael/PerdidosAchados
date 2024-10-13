@@ -1,20 +1,29 @@
 package com.sfs.perdidosachados.controller;
 
+import com.sfs.perdidosachados.model.Image;
+import com.sfs.perdidosachados.service.ImageService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/image")
 public class ImageController {
+
+
+    @Autowired
+    private ImageService imageService;
 
     @GetMapping("/getall")
     public ResponseEntity<?> getAll(){
         try {
-
-            return ResponseEntity.ok("");
+            List<Image> images = imageService.findAll();
+            return ResponseEntity.status(HttpStatus.FOUND).body(images);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch **: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch images: " + e.getMessage());
         }
     }
 
