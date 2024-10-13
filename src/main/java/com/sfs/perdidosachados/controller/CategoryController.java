@@ -21,7 +21,7 @@ public class CategoryController {
     public ResponseEntity<?> getAll(){
         try {
             List<Category> categories = categoryService.findAll();
-            return ResponseEntity.ok(categories);
+            return ResponseEntity.status(HttpStatus.OK).body(categories);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch categories: " + e.getMessage());
         }
@@ -32,7 +32,7 @@ public class CategoryController {
         try {
             Optional<Category> category = categoryService.findById(id);
             if (category.isPresent()) {
-                return ResponseEntity.ok(category.get());
+                return ResponseEntity.status(HttpStatus.OK).body(category.get());
             }else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found");
             }
@@ -45,7 +45,7 @@ public class CategoryController {
     public ResponseEntity<?> save(@RequestBody Category category ){
         try {
             Category savedCategory = categoryService.save(category);
-            return ResponseEntity.ok(savedCategory);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedCategory);
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to save category: " + e.getMessage());
         }
@@ -55,7 +55,7 @@ public class CategoryController {
     public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Category category ){
         try {
             Category updatedCategory = categoryService.updateById(id, category);
-            return ResponseEntity.ok(updatedCategory);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedCategory);
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update category: " + e.getMessage());
         }
@@ -65,7 +65,7 @@ public class CategoryController {
     public ResponseEntity<?> delete(@PathVariable Integer id){
         try {
             categoryService.deleteById(id);
-            return ResponseEntity.ok("Deleted");
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Category deleted successfully");
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete cattegory: " + e.getMessage());
         }
