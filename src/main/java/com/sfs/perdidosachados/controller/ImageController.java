@@ -65,6 +65,7 @@ public class ImageController {
     @GetMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
         try {
+            imageService.deleteById(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Image deleted:");
         }catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to delete image: " + e.getMessage());
